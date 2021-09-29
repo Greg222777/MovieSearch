@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nowik.moviesearch.R
 import com.nowik.moviesearch.SearchResultsAdapter
 import com.nowik.moviesearch.databinding.FragmentSearchBinding
+import com.nowik.moviesearch.model.Movie
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchResultsAdapter.OnMovieClickListener {
 
-    private val searchResultsAdapter = SearchResultsAdapter()
+    private val searchResultsAdapter = SearchResultsAdapter(this)
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
 
@@ -70,5 +73,12 @@ class SearchFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onMovieClicked(movie: Movie) {
+        val bundle = Bundle().apply {
+            putParcelable(MovieDetailsFragment.ARGS_MOVIE_ID, movie)
+        }
+        findNavController().navigate(R.id.action_search_to_details, bundle)
     }
 }

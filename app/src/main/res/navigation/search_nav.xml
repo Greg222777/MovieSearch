@@ -13,6 +13,7 @@
         <action
             android:id="@+id/action_search_to_details"
             app:destination="@id/fragment_movie_details" />
+
     </fragment>
 
     <fragment
@@ -20,6 +21,11 @@
         android:name="com.nowik.moviesearch.fragment.MovieDetailsFragment"
         android:label="RideHistory"
         tools:layout="@layout/fragment_movie_details">
+
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
 </navigation>

@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.nowik.moviesearch.databinding.SearchResultItemBinding
 import com.nowik.moviesearch.model.Movie
 
-class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
+class SearchResultsAdapter(val onMovieClickListener: OnMovieClickListener) :
+    RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
 
     var movies = listOf<Movie>()
 
@@ -26,6 +27,10 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.ViewHolde
             val path = "https://image.tmdb.org/t/p/w500" + movie.posterPath
 
             Glide.with(binding.posterImageView.context).load(path).into(binding.posterImageView)
+
+            binding.root.setOnClickListener{
+                onMovieClickListener.onMovieClicked(movie)
+            }
         }
     }
 
@@ -41,5 +46,9 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         return holder.bind(movies[position])
+    }
+
+    interface OnMovieClickListener {
+        fun onMovieClicked(movie: Movie)
     }
 }
