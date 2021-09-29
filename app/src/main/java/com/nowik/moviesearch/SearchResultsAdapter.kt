@@ -1,6 +1,5 @@
 package com.nowik.moviesearch
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,7 @@ class SearchResultsAdapter(val onMovieClickListener: OnMovieClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) {
-            binding.title.text = movie.title
+            binding.title.text = movie.originalTitle
             binding.releaseDate.text = movie.releaseDate
 
             /**

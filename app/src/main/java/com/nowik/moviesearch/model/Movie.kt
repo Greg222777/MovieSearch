@@ -1,12 +1,11 @@
 package com.nowik.moviesearch.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 data class Movie(
     val id: Int,
-    val title: String,
+    @SerializedName("original_title")
+    val originalTitle: String,
     @SerializedName("poster_path")
     val posterPath: String?,
     @SerializedName("release_date")
@@ -15,5 +14,6 @@ data class Movie(
     val backdropPath: String?,
     @SerializedName("vote_average")
     val voteAverage: Float,
-    val overview: String?
+    val overview: String?,
+    val homepage: String?
 )

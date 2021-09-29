@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MovieSearch</string>
     <string name="search_placeholder_text">You have no recent searches</string>
+    <string name="visit_website">Visit website</string>
 </resources>

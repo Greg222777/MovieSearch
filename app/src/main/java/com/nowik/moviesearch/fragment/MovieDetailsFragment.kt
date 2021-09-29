@@ -1,15 +1,19 @@
 package com.nowik.moviesearch.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.nowik.moviesearch.Utils
 import com.nowik.moviesearch.databinding.FragmentMovieDetailsBinding
 import com.nowik.moviesearch.model.Movie
+
 
 class MovieDetailsFragment : Fragment() {
 
@@ -35,7 +39,7 @@ class MovieDetailsFragment : Fragment() {
         getMovie()
     }
 
-    fun getMovie() {
+    private fun getMovie() {
         val movieId: Int? = arguments?.getInt(ARGS_MOVIE_ID)
 
         viewModel.movieLiveData.observe(viewLifecycleOwner) { movie ->
@@ -64,8 +68,18 @@ class MovieDetailsFragment : Fragment() {
         }
 
         // rating
-        // divide by 2 because rating bar has 5 stars and Movie object is out of 10
+        // divide by 2 because rating bar has 5 stars and averageVote in Movie object is out of 10
         binding.ratingBar.rating = movie.voteAverage / 2
+
+        // homepage
+        binding.visitWebsiteButton.setOnClickListener {
+            if (movie.homepage.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "No website", Toast.LENGTH_SHORT).show()
+            } else {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(movie.homepage))
+                startActivity(browserIntent)
+            }
+        }
     }
 
 
