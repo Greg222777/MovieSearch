@@ -1,9 +1,10 @@
-package com.nowik.moviesearch
+package com.nowik.moviesearch.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nowik.moviesearch.Utils
 import com.nowik.moviesearch.databinding.SearchResultItemBinding
 import com.nowik.moviesearch.model.Movie
 
@@ -18,10 +19,6 @@ class SearchResultsAdapter(val onMovieClickListener: OnMovieClickListener) :
         fun bind(movie: Movie) {
             binding.title.text = movie.originalTitle
             binding.releaseDate.text = movie.releaseDate
-
-            /**
-             * Pas la bonne taille
-             */
 
             if (!movie.posterPath.isNullOrEmpty()) {
                 Glide.with(binding.posterImageView.context)

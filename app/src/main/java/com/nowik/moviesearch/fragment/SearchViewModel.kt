@@ -3,7 +3,7 @@ package com.nowik.moviesearch.fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nowik.moviesearch.ImdbApiClient
+import com.nowik.moviesearch.network.ImdbApiClient
 import com.nowik.moviesearch.model.Movie
 import kotlinx.coroutines.launch
 

@@ -60,14 +60,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
                     android:text="@{movie.originalTitle}"
                     android:textColor="@color/black"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toRightOf="@id/posterImageView"
-                    app:layout_constraintTop_toBottomOf="@id/backdropImageView"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/playIcon"
                     tools:text="Title" />
 
                 <RatingBar
@@ -118,14 +118,14 @@
 
         <Button
             android:id="@+id/visitWebsiteButton"
-            android:textColor="@color/white"
-            android:text="@string/visit_website"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/visit_website"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

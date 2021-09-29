@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nowik.moviesearch.R
-import com.nowik.moviesearch.SearchResultsAdapter
+import com.nowik.moviesearch.adapter.SearchResultsAdapter
 import com.nowik.moviesearch.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment(), SearchResultsAdapter.OnMovieClickListener {

@@ -1,4 +1,4 @@
-package com.nowik.moviesearch
+package com.nowik.moviesearch.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,6 +21,8 @@ object ImdbApiClient {
             val client = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build()
+
+
 
             instance = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
