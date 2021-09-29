@@ -1,21 +1,21 @@
 package com.nowik.moviesearch.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nowik.moviesearch.ImdbApiClient
 import com.nowik.moviesearch.SearchResultsAdapter
 import com.nowik.moviesearch.databinding.FragmentSearchBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
     private val searchResultsAdapter = SearchResultsAdapter()
     private lateinit var binding: FragmentSearchBinding
+    private lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,12 +23,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
+        observeResults()
         handleSearch()
     }
 
@@ -38,19 +40,27 @@ class SearchFragment : Fragment() {
         binding.searchResultsRecyclerView.adapter = searchResultsAdapter
     }
 
+    private fun observeResults() {
+        viewModel.searchResultLiveData.observe(viewLifecycleOwner) { movies ->
+            searchResultsAdapter.movies = movies
+            requireActivity().runOnUiThread {
+                searchResultsAdapter.notifyDataSetChanged()
+
+                if (movies.isNotEmpty()) {
+                    binding.searchResultsRecyclerView.visibility = View.VISIBLE
+                    binding.placeHolderLayout.visibility = View.GONE
+                }
+
+            }
+        }
+    }
+
     private fun handleSearch() {
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null && query.isNotEmpty()) {
-                    GlobalScope.launch {
-                        val movies = ImdbApiClient.getInstance()
-                            .searchMovies(ImdbApiClient.API_KEY, query).results
-                        searchResultsAdapter.movies = movies
-                        requireActivity().runOnUiThread {
-                            searchResultsAdapter.notifyDataSetChanged()
-                        }
-                    }
+                    viewModel.searchMovies(query)
                 }
                 return true
             }
@@ -60,10 +70,5 @@ class SearchFragment : Fragment() {
             }
 
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        requireActivity().title = "Search"
     }
 }

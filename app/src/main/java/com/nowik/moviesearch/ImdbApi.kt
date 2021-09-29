@@ -1,5 +1,6 @@
 package com.nowik.moviesearch
 
+import androidx.lifecycle.LiveData
 import com.nowik.moviesearch.model.SearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
