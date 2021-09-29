@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Synopsis"
+                    android:text="@string/synopsis"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.nowik.moviesearch.R
 import com.nowik.moviesearch.Utils
 import com.nowik.moviesearch.databinding.FragmentMovieDetailsBinding
 import com.nowik.moviesearch.model.Movie
@@ -51,10 +52,12 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun bindMovie(movie: Movie) {
+
+        // textes (XML binding)
         binding.movie = movie
         binding.executePendingBindings()
 
-        //images
+        // images
         if (!movie.posterPath.isNullOrEmpty()) {
             Glide.with(binding.posterImageView.context)
                 .load(Utils.formatImagePath(movie.posterPath))
@@ -74,7 +77,8 @@ class MovieDetailsFragment : Fragment() {
         // homepage
         binding.visitWebsiteButton.setOnClickListener {
             if (movie.homepage.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "No website", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.no_website), Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(movie.homepage))
                 startActivity(browserIntent)
