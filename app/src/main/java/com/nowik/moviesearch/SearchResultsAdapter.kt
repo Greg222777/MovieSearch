@@ -24,12 +24,14 @@ class SearchResultsAdapter(val onMovieClickListener: OnMovieClickListener) :
              * Pas la bonne taille
              */
 
-            val path = "https://image.tmdb.org/t/p/w500" + movie.posterPath
+            if (!movie.posterPath.isNullOrEmpty()) {
+                Glide.with(binding.posterImageView.context)
+                    .load(Utils.formatImagePath(movie.posterPath))
+                    .into(binding.posterImageView)
+            }
 
-            Glide.with(binding.posterImageView.context).load(path).into(binding.posterImageView)
-
-            binding.root.setOnClickListener{
-                onMovieClickListener.onMovieClicked(movie)
+            binding.root.setOnClickListener {
+                onMovieClickListener.onMovieClicked(movie.id)
             }
         }
     }
@@ -49,6 +51,6 @@ class SearchResultsAdapter(val onMovieClickListener: OnMovieClickListener) :
     }
 
     interface OnMovieClickListener {
-        fun onMovieClicked(movie: Movie)
+        fun onMovieClicked(movieId: Int)
     }
 }

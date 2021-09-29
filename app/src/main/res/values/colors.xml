@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#dd7c66</color>
+    <color name="ratingStarGold">#FFD700</color>
 </resources>

@@ -1,7 +1,6 @@
 package com.nowik.moviesearch.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nowik.moviesearch.R
 import com.nowik.moviesearch.SearchResultsAdapter
 import com.nowik.moviesearch.databinding.FragmentSearchBinding
-import com.nowik.moviesearch.model.Movie
 
 class SearchFragment : Fragment(), SearchResultsAdapter.OnMovieClickListener {
 
@@ -75,9 +73,9 @@ class SearchFragment : Fragment(), SearchResultsAdapter.OnMovieClickListener {
         })
     }
 
-    override fun onMovieClicked(movie: Movie) {
+    override fun onMovieClicked(movieId: Int) {
         val bundle = Bundle().apply {
-            putParcelable(MovieDetailsFragment.ARGS_MOVIE_ID, movie)
+            putInt(MovieDetailsFragment.ARGS_MOVIE_ID, movieId)
         }
         findNavController().navigate(R.id.action_search_to_details, bundle)
     }

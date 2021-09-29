@@ -9,7 +9,8 @@ object ImdbApiClient {
     private var instance: ImdbApi? = null
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
-     const val API_KEY = "b2168bae3a2c67509eb6b97572f521c2"
+     const val IMAGES_BASE_URL = "https://image.tmdb.org/t/p/w500"
+    const val API_KEY = "b2168bae3a2c67509eb6b97572f521c2"
 
     @Synchronized
     fun getInstance(): ImdbApi {

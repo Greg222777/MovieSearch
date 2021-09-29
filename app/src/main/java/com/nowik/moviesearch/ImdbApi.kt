@@ -1,8 +1,10 @@
 package com.nowik.moviesearch
 
 import androidx.lifecycle.LiveData
+import com.nowik.moviesearch.model.Movie
 import com.nowik.moviesearch.model.SearchResult
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ImdbApi {
@@ -19,4 +21,11 @@ interface ImdbApi {
         @Query("api_key") apiKey: String,
         @Query("query") search: String
     ): SearchResult
+
+    @GET("/3/movie/{movie_id}")
+    suspend fun getMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+
+    ): Movie
 }
